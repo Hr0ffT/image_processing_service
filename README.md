@@ -1,2 +1,2 @@
-# barcode-processing-service
+# image-processing-service
 
