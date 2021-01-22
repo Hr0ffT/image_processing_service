@@ -14,7 +14,7 @@ public class ProcessHandler {
 
     private static final Logger log = Logger.getLogger(ProcessHandler.class);
 
-    private static final String START_MESSAGE = " ----- fetcher_service started -----";
+    private static final String START_MESSAGE = " ----- image_processing_service started -----";
 
     private static Rabbit rabbit;
 
