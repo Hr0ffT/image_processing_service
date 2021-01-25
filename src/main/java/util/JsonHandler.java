@@ -5,17 +5,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
-import rabbit.MQData;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
 
 
 public class JsonHandler {
 
-    private static String SERVICE_NAME = "fetcher_service";
-
+    private static final String SERVICE_NAME = ProcessHandler.getServiceName();
 
     private static final ObjectMapper objectMapper = getDefaultObjectMapper();
 
@@ -38,12 +35,6 @@ public class JsonHandler {
         JSONObject outputJsonObject = inputJsonObject.put(SERVICE_NAME, dataJsonObject);
 
         return outputJsonObject.toString();
-    }
-
-    public static MQData deserializeMQData(Path mqDataPath) throws IOException {
-
-        return objectMapper.readValue(mqDataPath.toFile(), MQData.class);
-
     }
 
     public static JsonNode getJsonFromURL(URL url) throws IOException {

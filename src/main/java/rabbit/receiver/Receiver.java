@@ -1,5 +1,6 @@
 package rabbit.receiver;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
@@ -16,7 +17,7 @@ public class Receiver {
 
     private static final Logger log = Logger.getLogger(Receiver.class);
 
-    private static final String CONSUMER_TAG = "image_processing_service";
+    private static final String CONSUMER_TAG = System.getenv("CONSUMER_TAG");
     private static final String START_MESSAGE = "[!] Receiver initialized. Waiting for messages...";
 
     MQConnection rabbit;
@@ -28,8 +29,8 @@ public class Receiver {
 
     private Receiver(MQConnection mqConnection) throws IOException {
         this.rabbit = mqConnection;
-        inputChannel = mqConnection.getInputChannel();
-        this.INPUT_QUEUE = mqConnection.getInputQueue();
+        inputChannel = rabbit.getInputChannel();
+        this.INPUT_QUEUE = rabbit.getInputQueue();
 
         startMessageReceiving();
 

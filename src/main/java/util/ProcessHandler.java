@@ -16,6 +16,8 @@ public class ProcessHandler {
 
     private static final String START_MESSAGE = " ----- image_processing_service started -----";
 
+    public static final String SERVICE_NAME = "image_processing_service";
+
     private static Rabbit rabbit;
 
     public static void initProgram() throws IOException, TimeoutException {
@@ -88,5 +90,9 @@ public class ProcessHandler {
         String jsonBarcodeObject = JsonHandler.serializeToJson(new BarcodeObject(barcode));
         return JsonHandler.putDataInJson(receivedJson, jsonBarcodeObject);
 
+    }
+
+    public static String getServiceName() {
+        return SERVICE_NAME;
     }
 }
