@@ -14,11 +14,12 @@ public class ProcessHandler {
 
     private static final Logger log = Logger.getLogger(ProcessHandler.class);
 
-    private static final String START_MESSAGE = " ----- image_processing_service started -----";
-
     public static final String SERVICE_NAME = "image_processing_service";
 
+    private static final String START_MESSAGE = String.format(" ----- %s started -----", SERVICE_NAME);
+
     private static Rabbit rabbit;
+
 
     public static void initProgram() throws IOException, TimeoutException {
         System.out.println(START_MESSAGE);
