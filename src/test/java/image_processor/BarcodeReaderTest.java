@@ -1,6 +1,7 @@
 package image_processor;
 
 import com.google.zxing.NotFoundException;
+import image_processor.BarcodeReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
