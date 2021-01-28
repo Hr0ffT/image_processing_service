@@ -2,6 +2,7 @@ package util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.zxing.NotFoundException;
+import image_processor.BarcodeReader;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import rabbit.Rabbit;

@@ -1,4 +1,4 @@
-package util;
+package image_processor;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;

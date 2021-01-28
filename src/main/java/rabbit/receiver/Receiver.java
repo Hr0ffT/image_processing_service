@@ -60,8 +60,9 @@ public class Receiver {
 
                 try {
                     log.debug("Received a message.");
+                    System.out.println(" - Received a message.");
                     ProcessHandler.messageReceived(receivedMessage);
-                } catch (JSONException e) {
+               } catch (JSONException e) {
                     log.error(e);
                 }
 
