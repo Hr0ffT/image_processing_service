@@ -1,10 +1,7 @@
 package rabbit.receiver;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.*;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import rabbit.MQConnection;
@@ -21,6 +18,7 @@ public class Receiver {
     private static final String START_MESSAGE = "[!] Receiver initialized. Waiting for messages...";
 
     MQConnection rabbit;
+    Consumer consumer;
     private final Channel inputChannel;
     private final String INPUT_QUEUE;
 
@@ -28,6 +26,7 @@ public class Receiver {
 
 
     private Receiver(MQConnection mqConnection) throws IOException {
+        this.consumer = initConsumer();
         this.rabbit = mqConnection;
         inputChannel = rabbit.getInputChannel();
         this.INPUT_QUEUE = rabbit.getInputQueue();
@@ -44,11 +43,11 @@ public class Receiver {
 
         inputChannel.queueDeclare(INPUT_QUEUE, true, false, false, null);
         System.out.println(START_MESSAGE);
-        inputChannel.basicConsume(INPUT_QUEUE, false, CONSUMER_TAG, defaultConsumer());
+        inputChannel.basicConsume(INPUT_QUEUE, false, CONSUMER_TAG, consumer);
 
     }
 
-    private DefaultConsumer defaultConsumer() {
+    private Consumer initConsumer() {
         return new DefaultConsumer(inputChannel) {
 
             @Override
@@ -62,7 +61,7 @@ public class Receiver {
                     log.debug("Received a message.");
                     System.out.println(" - Received a message.");
                     ProcessHandler.messageReceived(receivedMessage);
-               } catch (JSONException e) {
+                } catch (JSONException e) {
                     log.error(e);
                 }
 
